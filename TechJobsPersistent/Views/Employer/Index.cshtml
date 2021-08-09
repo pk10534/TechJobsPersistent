@@ -4,18 +4,50 @@
 
 @if (Model.Count == 0)
 {
-    <p>No employers are currently hiring!</p>
+    <p>No employers are currently hiring</p>
 }
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Location</th>>
+                <th scope="col">About</th>>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (Employer employer in Model)
+            {
+                <tr>
+                    <td>@employer.Id</td>
+                    <td>@employer.Name</td>
+                    <td>@employer.Location</td>
+                    <td>Learn More</td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+
+<!--
+<td>employer.Name</td>
+-->
+<!--
 else
 {
     <div>
         <ul>
-            @foreach (Employer employer in Model)
+            atforeach (Employer employer in Model)
             {
                 <li>
-                    <a asp-controller="Employer" asp-action="About" asp-route-id="@employer.Id">@employer.Name</a>
+                    <a asp-controller="Employer" asp-action="About" asp-route-id="atemployer.Id">atemployer.Name</a>
                 </li>
             }
         </ul>
     </div>
 }
+    -->
