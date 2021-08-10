@@ -1,27 +1,11 @@
-﻿@model List<TechJobsPersistent.Models.Employer>
+﻿@model TechJobsPersistent.Models.Employer
 
-@if (Model.Count == 0)
-{
-    <h1>No information regarding selected employer(s)!</h1>
-}
-else
-{
-    <h1>Information about: @Model[0].Name</h1>
-    <ul>
-        @foreach (var employerinfo in Model)
-        {
-            <li>@employerinfo.Name</li>
-            <li>@employerinfo.Location</li>
-        }
-    </ul>
-}
+<h1>Employer: @Model.Name</h1>
 
-
-<!--
-<h1>Employer: Name</h1>
 
 <div>
-    <p>Name: name</p>
-    <p>Location: location</p>
+    <p>Name: @Model.Name</p>
+    <p>Location: @Model.Location</p>
 </div>
-    -->
+
+

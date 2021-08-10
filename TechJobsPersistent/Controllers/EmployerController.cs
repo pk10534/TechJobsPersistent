@@ -61,44 +61,12 @@ namespace TechJobsPersistent.Controllers
 
         public IActionResult About(int id)
         {
-            Employer employerDescription = _context.Employers
-                .Include(e => e.Name)
-                .Include(e => e.Location)
-                .Single(e => e.Id == id);
+            Employer employer = _context.Employers.Find(id);
 
-
-            List<Skill> skills = _context.Skills
-            .Where(et => et.Id == id)
-            .Include(et => et.Name)
-            //.Include(et => et.Location)
-            .ToList();
-
-            AddJobViewModel viewModel = new AddJobViewModel (employerDescription, skills);
-
-            return View(viewModel);
+            return View(employer);
         }
 
 
-        /*
-        public IActionResult About(int id)
-        {
-            
-            
-            Job theJob = _context.Jobs
-                .Include(e => e.Employer)
-                .Single(e => e.Id == id);
-            
 
-            List<Skill> skills = _context.Skills
-            .Where(et => et.Id == id)
-            .Include(et => et.Name)
-            //.Include(et => et.Location)
-            .ToList();
-
-            AddJobSkillViewModel viewModel = new AddJobSkillViewModel(theJob, skills);
-
-            return View(viewModel);
-        }
-        */
     }
 }
