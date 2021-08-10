@@ -41,40 +41,64 @@ namespace TechJobsPersistent.Controllers
 
 
         [HttpPost]
-        public IActionResult ProcessAddEmployerForm(Employer employer)
+        public IActionResult Add (AddEmployerViewModel addEmployerViewModel)
         {
             if (ModelState.IsValid)
-            { 
-                _context.Employers.Add(employer);
-                _context.SaveChanges();
-                return Redirect("/Employer");
-            }
-            return View("Add", employer);
-        }
-        /*
-        [HttpPost]
-        public IActionResult ProcessAddEmployerForm(Employer employer)
-        { 
-            if (ModelState.IsValid)
+           
             {
-                _context.Employers.Add(employer);
+                Employer newEmployer = new Employer
+                {
+                    Name = addEmployerViewModel.Name,
+                    Location = addEmployerViewModel.Location
+
+                };
+                _context.Employers.Add(newEmployer);
                 _context.SaveChanges();
                 return Redirect("/Employer");
             }
-            return View("Add", employer);
+            return View(addEmployerViewModel);
         }
-        */
-
-
 
         public IActionResult About(int id)
         {
-            List<Employer> employers = _context.Employers
+            Employer employerDescription = _context.Employers
+                .Include(e => e.Name)
+                .Include(e => e.Location)
+                .Single(e => e.Id == id);
+
+
+            List<Skill> skills = _context.Skills
             .Where(et => et.Id == id)
             .Include(et => et.Name)
-            .Include(et => et.Location)
+            //.Include(et => et.Location)
             .ToList();
-            return View(employers);
+
+            AddJobViewModel viewModel = new AddJobViewModel (employerDescription, skills);
+
+            return View(viewModel);
         }
+
+
+        /*
+        public IActionResult About(int id)
+        {
+            
+            
+            Job theJob = _context.Jobs
+                .Include(e => e.Employer)
+                .Single(e => e.Id == id);
+            
+
+            List<Skill> skills = _context.Skills
+            .Where(et => et.Id == id)
+            .Include(et => et.Name)
+            //.Include(et => et.Location)
+            .ToList();
+
+            AddJobSkillViewModel viewModel = new AddJobSkillViewModel(theJob, skills);
+
+            return View(viewModel);
+        }
+        */
     }
 }

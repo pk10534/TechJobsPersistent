@@ -24,7 +24,7 @@ else
                     <td>@employer.Id</td>
                     <td>@employer.Name</td>
                     <td>@employer.Location</td>
-                    <td>Learn More</td>
+                    <td><a asp-controller="Employer" asp-action="About" asp-route-id="atemployer.Id">Learn More</a></td> 
 
                 </tr>
             }
